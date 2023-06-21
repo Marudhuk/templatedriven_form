@@ -1,0 +1,72 @@
+<h1>Template Driven Form</h1>
+<form #templateForm="ngForm">
+  <p>
+    <label for="firstname">First Name</label>
+    <input type="text" id="firstname" name="firstname" [(ngModel)]="firstname">
+  </p>
+
+  <p>
+    <label for="lastname">Last Name</label>
+    <input type="text" id="lastname" name="lastname" [(ngModel)]="lastname">
+  </p>
+
+  <p>
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" [(ngModel)]="email">
+  </p>
+
+  <p>
+    <label for="gender">Gender</label>
+    <input type="radio" value="male" id="gender" name="gender" [(ngModel)]="gender"> Male
+    <input type="radio" value="female" id="gender" name="gender" [(ngModel)]="gender"> Female
+  </p>
+  
+  <p>
+    <label for="isMarried">Married</label>
+    <input type="checkbox" name="isMarried" [(ngModel)]="married">
+  </p>
+
+  <p>
+    <label for="country">Country</label>
+    <select name="country" [(ngModel)]="country">
+      <option *ngFor="let c of countryList">
+        {{c}}
+      </option>
+    </select>
+  </p>
+    <!-- <button type="button" (click)="onSubmit(templateForm)">Submit</button> -->
+    <div>
+      <button *ngIf="!visible" type="button" [disabled]="!templateForm.valid" (click)="onSubmit(templateForm)">Submit</button>
+      <button *ngIf="visible" type="button" class="updateBtn" [disabled]="!templateForm.value" (click)="updateData(templateForm)">Update</button>
+  </div>
+
+</form><br><br>
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Marital Status</th>
+        <th>Country</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let x of user">
+        <td>{{ x.firtsName }}</td>
+        <td>{{ x.lastName }}</td>
+        <td>{{ x.email }}</td>
+        <td>{{ x.gender }}</td>
+        <td>{{ x.married }}</td>
+        <td>{{ x.country }}</td>
+        <td>
+          <button (click)="editData(x.id)">Edit</button>
+          <button (click)="deleteData(x.id,x.firtsName)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
